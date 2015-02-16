@@ -11,7 +11,7 @@ final class TokenEncoder implements TokenEncoderInterface
      */
     public function encode($input)
     {
-        $input = time() . base64_encode($input);
+        $input = md5(time()) .'.'. base64_encode($input);
 
         return base64_encode($input);
     }
