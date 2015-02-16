@@ -4,6 +4,6 @@
     "license": "MIT",
     "type": "library",
     "autoload": {
-        "psr-4": { "\\TeaTo\\Component\\Encoder\\": ""}
+        "psr-4": { "TeaTo\\Component\\Encoder\\": ""}
     }
 }
