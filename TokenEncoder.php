@@ -33,4 +33,24 @@ final class TokenEncoder implements TokenEncoderInterface
 
         return base64_decode($input);
     }
+
+    /**
+     * @param string $input
+     *
+     * @return int Return the request timestamp
+     */
+    public function extractHashedDateFromOriginalHash($input)
+    {
+        $input = base64_decode($input);
+
+        if (false === strpos($input, '.')) {
+            throw new \RuntimeException('Invalid token');
+        }
+
+        list ($input,) = explode('.', $input);
+
+        return $input;
+    }
+
+
 }

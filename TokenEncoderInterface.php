@@ -17,4 +17,11 @@ interface TokenEncoderInterface
      * @return string
      */
     public function decode($input);
+
+    /**
+     * @param string $input
+     *
+     * @return string Return the encoded timestamp
+     */
+    public function extractHashedDateFromOriginalHash($input);
 }
