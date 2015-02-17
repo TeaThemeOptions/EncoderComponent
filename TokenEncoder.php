@@ -5,6 +5,11 @@ namespace TeaTo\Component\Encoder;
 final class TokenEncoder implements TokenEncoderInterface
 {
     /**
+     * @var int
+     */
+    protected $hashLifetime = 5;
+
+    /**
      * @param string $input
      *
      * @return string
@@ -50,6 +55,6 @@ final class TokenEncoder implements TokenEncoderInterface
 
         list ($encodedTime,) = explode('.', $encodedTime);
 
-        return $encodedTime == md5($attempt) && $attempt + 60 <= time();
+        return $encodedTime == md5($attempt) && $attempt + $this->hashLifetime <= time();
     }
 }
