@@ -19,9 +19,10 @@ interface TokenEncoderInterface
     public function decode($input);
 
     /**
-     * @param string $input
+     * @param string $attempt
+     * @param string $hash
      *
-     * @return string Return the encoded timestamp
+     * @return bool
      */
-    public function extractHashedDateFromOriginalHash($input);
+    public function isDateValid($attempt, $hash);
 }

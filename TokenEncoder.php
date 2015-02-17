@@ -35,22 +35,21 @@ final class TokenEncoder implements TokenEncoderInterface
     }
 
     /**
-     * @param string $input
+     * @param int $attempt
+     * @param string $hash
      *
-     * @return int Return the request timestamp
+     * @return bool
      */
-    public function extractHashedDateFromOriginalHash($input)
+    public function isDateValid($attempt, $hash)
     {
-        $input = base64_decode($input);
+        $encodedTime = base64_decode($hash);
 
-        if (false === strpos($input, '.')) {
-            throw new \RuntimeException('Invalid token');
+        if (false === strpos($encodedTime, '.')) {
+            return false;
         }
 
-        list ($input,) = explode('.', $input);
+        list ($encodedTime,) = explode('.', $encodedTime);
 
-        return $input;
+        return $encodedTime == md5($attempt) && $attempt + 60 <= time();
     }
-
-
 }
