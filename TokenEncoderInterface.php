@@ -19,10 +19,9 @@ interface TokenEncoderInterface
     public function decode($input);
 
     /**
-     * @param string $attempt
-     * @param string $hash
+     * @param mixed $input
      *
      * @return bool
      */
-    public function isDateValid($attempt, $hash);
+    public function isTokenValid($input);
 }

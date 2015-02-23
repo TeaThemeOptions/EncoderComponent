@@ -40,21 +40,25 @@ final class TokenEncoder implements TokenEncoderInterface
     }
 
     /**
-     * @param int $attempt
-     * @param string $hash
+     * @param mixed $input
      *
      * @return bool
      */
-    public function isDateValid($attempt, $hash)
+    public function isTokenValid($input)
     {
-        $encodedTime = base64_decode($hash);
-
-        if (false === strpos($encodedTime, '.')) {
+        if (!$input->headers->has('X-Token') || !$input->headers->has('X-Token-Date')) {
             return false;
         }
 
-        list ($encodedTime,) = explode('.', $encodedTime);
+        $hash = base64_decode($input->headers->get('X-Token'));
 
-        return $encodedTime == md5($attempt) && $attempt + $this->hashLifetime <= time();
+        if (false === strpos($hash, '.')) {
+            return false;
+        }
+
+        list($encodedTime,) = explode('.', $hash);
+        $attemptDate = $input->headers->get('X-Token-Date');
+
+        return $encodedTime == md5($attemptDate) && $attemptDate + $this->hashLifetime <= time();
     }
 }

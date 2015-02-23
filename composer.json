@@ -5,5 +5,8 @@
     "type": "library",
     "autoload": {
         "psr-4": { "TeaTo\\Component\\Encoder\\": ""}
+    },
+    "require": {
+        "symfony/http-foundation": "~2.5"
     }
 }
